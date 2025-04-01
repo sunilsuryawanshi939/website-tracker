@@ -1,19 +1,16 @@
 const express = require("express");
-const fs = require("fs");
 const cors = require("cors");
 
 const app = express();
 app.use(cors());
 
+// Example route to log data with timestamp
 app.get("/track", (req, res) => {
   const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
   const timestamp = new Date().toISOString();
-  
-  // Log data in a file
-  const logData = `${timestamp} - IP: ${ip}\n`;
-  fs.appendFile("logs.txt", logData, (err) => {
-    if (err) console.error("Error logging data:", err);
-  });
+
+  // Log the request with timestamp to the console
+  console.log(`[${timestamp}] Request received from IP: ${ip}`);
 
   res.json({ message: "Logged", ip, timestamp });
 });
