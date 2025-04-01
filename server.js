@@ -5,7 +5,7 @@ const app = express();
 app.use(cors());
 
 // Example route to log data with timestamp
-app.get("/track", (req, res) => {
+app.post("/track", (req, res) => {
   const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
   const timestamp = new Date().toISOString();
 
